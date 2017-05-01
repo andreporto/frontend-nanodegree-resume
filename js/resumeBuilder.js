@@ -41,7 +41,8 @@ var projects = {
                 "https://lh3.googleusercontent.com/lepZpU0EnwGUUqxg0nJ8SXcfmjf2zKZZiQv-L35O06CPHt1zj35zB6-SicENDYVVxzw=h900",
                 "https://lh3.googleusercontent.com/fPrEraG9xRuN4pSAza7Ye_zEsx1KQYSDnNoWSMsmB_7Dvc1U-WKlFFB2TNjEhsrGEH0=h900",
                 "https://lh3.googleusercontent.com/BtGAxc1xInDpeKLtHtahZfOknNEV7TqFusxjpTLgcsCpUxgH6vWF6eRUEg8WE-HeGA=h900"
-            ]
+            ],
+            url: "https://play.google.com/store/apps/details?id=br.com.saladatech.tarefas"
         },
         {
             title: "CheckList - Segurança Do Trabalho",
@@ -53,14 +54,15 @@ var projects = {
                 "https://lh3.googleusercontent.com/bKTwgrgZfQPw7I9p5YFVdA3CqRvos2sM96gEuhdG9w2WTAS50I1sfe8EzXIoiS2z0ibK=h900",
                 "https://lh3.googleusercontent.com/2xPCQjudHkKqpkoboUmlM7bRAgi8-wXPz7lIccxYm6J1XwtLHCuQ0JuKFlNEib39M7U=h900",
                 "https://lh3.googleusercontent.com/6pAN3L6pRHWv3SDJAvSun9pwLycOLQ4xjWEdxm6zKIv1TusKbN6tsAMvXc4nOmsqQm1I=h900"
-            ]
+            ],
+            url: "https://play.google.com/store/apps/details?id=com.saladatech.check_list_inspecao_seguranca_rabalho"
         }
     ],
     display: function () {
         var newEntry;
         projects.projects.forEach((project) => {
             newEntry = $(HTMLprojectStart).html(
-                HTMLprojectTitle.replace("#", project.title).replace("%data%", project.title) +
+                HTMLprojectTitle.replace("#", project.url).replace("%data%", project.title) +
                 HTMLprojectDates.replace("%data%", project.datesWorked) +
                 HTMLprojectDescription.replace("%data%", project.description)
             );
