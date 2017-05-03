@@ -103,7 +103,7 @@ var bio = {
             });
         }
 
-        let contactInfo = HTMLmobile.replace(placeholder, bio.contacts.whatsapp) +
+        let contactInfo = HTMLmobile.replace(placeholder, bio.contacts.mobile) +
             HTMLemail.replace(placeholder, bio.contacts.email) +
             HTMLgithub.replace(placeholder, bio.contacts.github) +
             HTMLlocation.replace(placeholder, bio.contacts.location);
@@ -111,7 +111,7 @@ var bio = {
         $("#footerContacts").append(contactInfo);
 
     }
-}
+};
 
 var education = {
     schools: [{
@@ -153,7 +153,7 @@ var education = {
             $("#education").append(newEntry);
         });
     }
-}
+};
 
 bio.display();
 education.display();
