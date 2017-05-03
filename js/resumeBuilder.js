@@ -1,9 +1,11 @@
+const placeholder = '%data%';
+
 var work = {
     jobs: [{
             employer: "SERPRO - Serviço Federal de Processamento de Dados",
             title: "Analista - Desenvolvedor",
             location: "Recife - PE",
-            datesWorked: "desde 11/2001",
+            dates: "desde 11/2001",
             description: "Realização de elicitação e análise de requisitos, implementação de software e realização de testes",
             url: "http://www.serpro.gov.br"
         },
@@ -11,22 +13,22 @@ var work = {
             employer: "Ministério da Saúde",
             title: "Agente Administrativo",
             location: "Maceió - AL",
-            datesWorked: "1995 - 2001",
+            dates: "1995 - 2001",
             description: "Trabalhos administrativos de atendimento ao público e a servidores, auxílio em serviços de informática e implantação de rede de comunicação",
             url: "http://www.funasa.gov.br"
         }
     ],
     display: function () {
-        var newEntry;
+        let newEntry;
 
         work.jobs.forEach((job) => {
             $("#workExperience").append(HTMLworkStart);
             $(".work-entry:last").append();
             newEntry = HTMLworkEmployer.replace("#", job.url);
-            newEntry = newEntry.replace("%data%", job.employer) + HTMLworkTitle.replace("%data%", job.title);
+            newEntry = newEntry.replace(placeholder, job.employer) + HTMLworkTitle.replace(placeholder, job.title);
             $(".work-entry:last").append(newEntry);
-            $(".work-entry:last").append(HTMLworkDates.replace("%data%", job.datesWorked));
-            $(".work-entry:last").append(HTMLworkDescription.replace("%data%", job.description));
+            $(".work-entry:last").append(HTMLworkDates.replace(placeholder, job.dates));
+            $(".work-entry:last").append(HTMLworkDescription.replace(placeholder, job.description));
         });
     }
 };
@@ -34,7 +36,7 @@ var work = {
 var projects = {
     projects: [{
             title: "Lista de Tarefas Pessoais",
-            datesWorked: "2016",
+            dates: "2016",
             description: "Aplicativo para dispositivos mobile para auxiliar no controle de tarefas a fazer",
             images: [
                 "https://lh3.googleusercontent.com/-uZTrSz39wYpmX4pWUhZ44Tct8DtgcUiloGLdeCYQvKJB9QFmU7xmqaRIwkATHTQsluM=h310",
@@ -46,7 +48,7 @@ var projects = {
         },
         {
             title: "CheckList - Segurança Do Trabalho",
-            datesWorked: "2016",
+            dates: "2016",
             description: "Este APP tem por objetivo estimular o ensino das Normas Regulamentadoras (NR's) brasileiras na área de segurança do trabalho, bem como estabelecer uma ferramenta de apoio na realização de inspeções de segurança do trabalho, prezando pelo princípio prevencionista.",
             images: [
                 "https://lh3.googleusercontent.com/nSXeI6qoX85o-j1ZIXBpitrHkodcqOrUjrBT-YRgHo_cu4_lXO0hRAoHeYzo3mJTfDFk=h900",
@@ -59,15 +61,15 @@ var projects = {
         }
     ],
     display: function () {
-        var newEntry;
+        let newEntry;
         projects.projects.forEach((project) => {
             newEntry = $(HTMLprojectStart).html(
-                HTMLprojectTitle.replace("#", project.url).replace("%data%", project.title) +
-                HTMLprojectDates.replace("%data%", project.datesWorked) +
-                HTMLprojectDescription.replace("%data%", project.description)
+                HTMLprojectTitle.replace("#", project.url).replace(placeholder, project.title) +
+                HTMLprojectDates.replace(placeholder, project.dates) +
+                HTMLprojectDescription.replace(placeholder, project.description)
             );
             project.images.forEach((img) => {
-                newEntry.append(HTMLprojectImage.replace("%data%", img));
+                newEntry.append(HTMLprojectImage.replace(placeholder, img));
             });
             $("#projects").append(newEntry);
         });
@@ -88,17 +90,27 @@ var bio = {
     skills: ["HTML5", "TypeScript", "Angular", "Ionic", "PL/SQL"],
     biopic: "https://avatars2.githubusercontent.com/u/8604870?v=3&s=460",
     display: function () {
-        var headerInfo = HTMLheaderName.replace("%data%", bio.name) +
-            HTMLheaderRole.replace("%data%", bio.role);
+        let headerInfo = HTMLheaderName.replace(placeholder, bio.name) +
+            HTMLheaderRole.replace(placeholder, bio.role);
         $("#header").prepend(headerInfo);
 
-        var contactInfo = HTMLmobile.replace("%data%", bio.contacts.whatsapp) +
-            HTMLemail.replace("%data%", bio.contacts.email) +
-            HTMLgithub.replace("%data%", bio.contacts.github) +
-            HTMLlocation.replace("%data%", bio.contacts.location)
-        $("#topContacts").append(contactInfo);
-    }
+        let formattedBioPic = HTMLbioPic.replace(placeholder, bio.biopic);
+        $('#header').append(formattedBioPic);
+        if (bio.skills.length > 0) {
+            $('#header').append(HTMLskillsStart);
+            bio.skills.forEach((sk)=>{
+                $('#skills').append(HTMLskills.replace(placeholder, sk));
+            });
+        }
 
+        let contactInfo = HTMLmobile.replace(placeholder, bio.contacts.whatsapp) +
+            HTMLemail.replace(placeholder, bio.contacts.email) +
+            HTMLgithub.replace(placeholder, bio.contacts.github) +
+            HTMLlocation.replace(placeholder, bio.contacts.location);
+        $("#topContacts").append(contactInfo);
+        $("#footerContacts").append(contactInfo);
+
+    }
 }
 
 var education = {
@@ -107,7 +119,7 @@ var education = {
         location: "Maceió - AL",
         degree: "Ciência da Computação",
         dates: "1992-2000",
-        major: "BSc",
+        majors: "BSc",
         url: "http://ufal.br"
     }],
     onlineCourses: [{
@@ -117,14 +129,14 @@ var education = {
         url: "http://udacity.com"
     }],
     display: function () {
-        var newEntry;
+        let newEntry;
         education.schools.forEach((education) => {
             newEntry = $(HTMLschoolStart).html(
-                HTMLschoolName.replace("#", education.url).replace("%data%", education.name) +
-                HTMLschoolDegree.replace("%data%", education.degree) +
-                HTMLschoolDates.replace("%data%", education.dates) +
-                HTMLschoolLocation.replace("%data%", education.location) +
-                HTMLschoolMajor.replace("%data%", education.major)
+                HTMLschoolName.replace("#", education.url).replace(placeholder, education.name) +
+                HTMLschoolDegree.replace(placeholder, education.degree) +
+                HTMLschoolDates.replace(placeholder, education.dates) +
+                HTMLschoolLocation.replace(placeholder, education.location) +
+                HTMLschoolMajor.replace(placeholder, education.majors)
             );
             $("#education").append(newEntry);
         });
@@ -134,9 +146,9 @@ var education = {
         education.onlineCourses.forEach((education) => {
             newEntry = $(HTMLschoolStart).html(
                 HTMLonlineTitle.replace("#", education.url).replace("%data%", education.title) +
-                HTMLonlineSchool.replace("%data%", education.school) +
-                HTMLonlineDates.replace("%data%", education.dates) +
-                HTMLonlineURL.replace("#", education.url).replace("%data%", education.url)
+                HTMLonlineSchool.replace(placeholder, education.school) +
+                HTMLonlineDates.replace(placeholder, education.dates) +
+                HTMLonlineURL.replace("#", education.url).replace(placeholder, education.url)
             );
             $("#education").append(newEntry);
         });
